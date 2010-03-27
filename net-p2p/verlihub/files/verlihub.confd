@@ -1,0 +1,21 @@
+# /etc/conf.d/verlihub
+
+PIDFILE=/var/run/verlihub.pid
+CONF=/etc/verlihub/dbconfig
+
+# 
+VERLIHUB_USER=verlihub
+VERLIHUB_GROUP=verlihub
+
+# verlihub logging options
+# LOG_LEVEL:
+# 0 - disabled all logs
+# 1 - enabled errors logging
+# 2 - enabled both error and verlihub messages logs
+
+LOG_LEVEL=0
+LOGDIR=/var/log/verlihub
+ERROR_LOG=$LOGDIR/error.log
+VERLIHUB_LOG=$LOGDIR/verlihub.log
+
+

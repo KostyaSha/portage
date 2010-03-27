@@ -1,0 +1,9 @@
+# ChangeLog for net-p2p/verlihub
+# Copyright 1999-2010 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+*verlihub-0.9.8e-r2 (24 Jan 2010)
+
+  24 Jan 2010; Kostya Sha <gentoo.integer@gmail.com> +verlihub-0.9.8e-r2,
+  +files/verlihub.initd, +files/verlihub.confd:
+  Rewrited verlihub-0.9.8e-r2.ebuild, added confd and initd scripts.

@@ -1,0 +1,43 @@
+#!/sbin/runscript
+
+
+depend() {
+	need net
+}
+
+checkconfig() {
+	if [ ! -f ${VERLIHUB_CONF} ] ; then
+         eerror "Please setup ${VERLIHUB_CONF} before starting verlihub"
+	 eerror "You can setup it by entering `emerge --config verlihub`"
+	 return 1
+	fi
+
+	case ${LOG_LEVEL} in
+		0 ) ERROR_LOG=/dev/null; VERLIHUB_LOG=/dev/null;;
+		1 ) VERLIHUB_LOG=/dev/null;;
+	esac
+
+}
+
+start() {
+	checkconfig || return 1
+	ebegin "Starting verlihub"
+	start-stop-daemon --start --exec /usr/bin/verlihub -1 ${VERLIHUB_LOG} -2 ${ERROR_LOG} \
+		--make-pidfile --pidfile "${PIDFILE}"  --user ${VERLIHUB_USER} \
+		--group ${VERLIHUB_GROUP} --background
+	eend $?
+
+}
+
+stop() {
+	ebegin "Stopping verlihub"
+	start-stop-daemon --stop --exec /usr/bin/verlihub \
+		--pidfile ${PIDFILE}
+        eend $?
+}
+
+restart() {
+	stop
+	sleep 3
+	start
+}
