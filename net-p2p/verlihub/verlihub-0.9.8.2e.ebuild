@@ -51,10 +51,8 @@ src_install() {
 	find "${D}" -name '*.la' -exec rm -rf '{}' '+' || die "la removal failed"
 
 	diropts -o verlihub -g verlihub -m0750
-	dodir /etc/verlihub || die
 	keepdir /etc/verlihub || die
 	diropts -o verlihub -g verlihub -m0770
-	dodir /var/log/verlihub || die
 	keepdir /var/log/verlihub || die
 
 	newinitd "${FILESDIR}"/verlihub.initd verlihub || die
@@ -64,14 +62,14 @@ src_install() {
 
 	docinto "scripts"
 	dodoc \
-			scripts/runhub \
-			scripts/vh_getcfg \
-			scripts/vh_getdb \
-			scripts/vh_regnick \
-			scripts/vh_restart \
-			scripts/vh_runhub \
-			scripts/vh_setup \
-			scripts/vh_trigger || die
+		scripts/runhub \
+		scripts/vh_getcfg \
+		scripts/vh_getdb \
+		scripts/vh_regnick \
+		scripts/vh_restart \
+		scripts/vh_runhub \
+		scripts/vh_setup \
+		scripts/vh_trigger || die
 }
 
 pkg_postinst() {
