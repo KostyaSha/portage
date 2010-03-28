@@ -33,7 +33,7 @@ PDEPEND=" lua? ( net-libs/lua ) "
 #	  thublink? ( net-libs/thublink )
 #	"
 
-S="${WORKDIR}/${PF}"
+S="${WORKDIR}/${MY_PV}"
 
 pkg_preinst() {
 	enewgroup verlihub
@@ -64,15 +64,14 @@ src_install() {
 
 	docinto "scripts"
 	dodoc \
-		scripts/runhub \
-		scripts/vh_getcfg \
-		scripts/vh_getdb \
-		scripts/vh_regnick \
-		scripts/vh_restart \
-		scripts/vh_runhub \
-		scripts/vh_setup \
-		scripts/vh_trigger || die
-
+			scripts/runhub \
+			scripts/vh_getcfg \
+			scripts/vh_getdb \
+			scripts/vh_regnick \
+			scripts/vh_restart \
+			scripts/vh_runhub \
+			scripts/vh_setup \
+			scripts/vh_trigger || die
 }
 
 pkg_postinst() {
