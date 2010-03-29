@@ -2,25 +2,26 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
+EAPI=2
+
 inherit eutils versionator
 
 MY_PV=${PN}-$(get_version_component_range 1-3)$(get_version_component_range 5)-r$(get_version_component_range 4)
-
 DESCRIPTION="Direct connect server with plugins support"
-HOMEPAGE="http://www.verlihub-project.org"
+HOMEPAGE="http://www.verlihub-project.org/"
 SRC_URI="http://www.verlihub-project.org/download/${MY_PV}.tar.bz2"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-
 #IUSE="lua iplog forbid funny messanger chatroom isp replacer stats python thublink"
 IUSE="lua"
 
 DEPEND="dev-libs/libpcre
-		dev-libs/geoip
-		>=dev-db/mysql-4.0.20
-		sys-libs/zlib"
-PDEPEND=" lua? ( net-libs/lua ) "
+	dev-libs/geoip
+	>=dev-db/mysql-4.0.20
+	sys-libs/zlib"
+RDEPEND="lua? ( net-libs/lua )"
 # iplog? ( net-libs/iplog )
 #	  forbid? ( net-libs/forbid )
 #	  funny? ( net-libs/funny )
@@ -33,7 +34,7 @@ PDEPEND=" lua? ( net-libs/lua ) "
 #	  thublink? ( net-libs/thublink )
 #	"
 
-S="${WORKDIR}/${MY_PV}"
+S=${WORKDIR}/${MY_PV}
 
 pkg_preinst() {
 	enewgroup verlihub
@@ -41,7 +42,7 @@ pkg_preinst() {
 }
 
 src_compile() {
-	econf --enable-static=no || die "econf failed"
+	econf --enable-static=no
 	emake || die "Make failed; please report problems or bugs \
 	to bugs@verlihub-project.org or visit http://forums.verlihub-project.org/viewforum.php?f=35"
 }
