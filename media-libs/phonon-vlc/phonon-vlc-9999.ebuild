@@ -14,8 +14,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~x86"
 
-DEPEND=""
-
+DEPEND=">=media-video/vlc-1.1.0"
 RDEPEND="${DEPEND}"
 
 src_configure()	{
@@ -25,4 +24,3 @@ src_configure()	{
 src_install() {
 	cmake-utils_src_install
 }
-
