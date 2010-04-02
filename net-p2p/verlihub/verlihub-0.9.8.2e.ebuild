@@ -15,13 +15,14 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 #IUSE="lua iplog forbid funny messanger chatroom isp replacer stats python thublink"
-IUSE="lua"
+#IUSE="lua"
 
 DEPEND="dev-libs/libpcre
 	dev-libs/geoip
 	>=dev-db/mysql-4.0.20
 	sys-libs/zlib"
-RDEPEND="lua? ( net-libs/lua )"
+RDEPEND="${DEPEND}"
+#RDEPEND="lua? ( net-libs/lua )"
 # iplog? ( net-libs/iplog )
 #	  forbid? ( net-libs/forbid )
 #	  funny? ( net-libs/funny )
@@ -41,8 +42,11 @@ pkg_preinst() {
 	enewuser verlihub -1 -1 -1 verlihub
 }
 
-src_compile() {
+src_configure() {
 	econf --enable-static=no
+}
+
+src_compile() {
 	emake || die "Make failed; please report problems or bugs \
 	to bugs@verlihub-project.org or visit http://forums.verlihub-project.org/viewforum.php?f=35"
 }
