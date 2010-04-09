@@ -3,6 +3,8 @@
 # $Header: $
 EAPI=2
 # ebuild for darktable by jo hanika (hanatos@gmail.com)
+# rewrited by Kostya 'integer' Sha <gentoo.integer@gmail.com>
+# i'm not using gnome, so don't know how to install schemas
 inherit autotools eutils gnome2-utils
 
 DESCRIPTION="Utility to organize and develop raw images"

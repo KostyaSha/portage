@@ -3,13 +3,15 @@
 # $Header: $
 EAPI=2
 # ebuild for darktable by jo hanika (hanatos@gmail.com)
+# rewrited by Kostya 'integer' Sha <gentoo.integer@gmail.com>
+# i'm not using gnome, so don't know how to install schemas
 inherit autotools eutils gnome2-utils
 
 DESCRIPTION="Utility to organize and develop raw images"
-HOMEPAGE="http://darktable.sf.net/"
+HOMEPAGE="http://darktable.sourceforge.net/"
 if [ ${PV} = 9999 ]; then
 	inherit git
-	EGIT_REPO_URI="git://darktable.git.sf.net/gitroot/darktable/darktable"
+	EGIT_REPO_URI="git://darktable.git.sourceforge.net/gitroot/darktable/${PN}"
 	EGIT_BRANCH="master"
 else
 	SRC_URI="mirror://sourceforge.net/${PN}/${P}.tar.bz2"
