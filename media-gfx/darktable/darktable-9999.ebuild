@@ -39,7 +39,10 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 src_configure() {
-	eautoreconf
+#	eautoreconf
+	if [ ! -e configure ] ; then
+		./autogen.sh
+	fi
 	econf --enable-static=no \
 		$(use_enable openmp) \
 		$(use_enable nls) \
