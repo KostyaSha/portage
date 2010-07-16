@@ -21,9 +21,9 @@ HOMEPAGE="http://darktable.sourceforge.net/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="gegl gnome openmp lensfun nls"
+IUSE="debug gegl gnome openmp lensfun nls static"
 
-COMMON_DEPEND="
+RDEPEND="
 	>=x11-libs/gtk+-2.18:2
 	>=gnome-base/libglade-2.6.3
 	>=dev-db/sqlite-3.6.11
@@ -36,8 +36,7 @@ COMMON_DEPEND="
 	lensfun? ( >=media-libs/lensfun-0.2.4 )
 	gnome? ( >=gnome-base/gconf-2.24.0 )
 	>=media-libs/tiff-3.9.2"
-DEPEND="${COMMON_DEPEND} >=dev-util/intltool-0.40.5"
-RDEPEND="${COMMON_DEPEND}"
+DEPEND="${RDEPEND} >=dev-util/intltool-0.40.5"
 
 src_prepare() {
 	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
@@ -46,16 +45,19 @@ src_prepare() {
 #	if [ ! -e configure ] ; then
 #		./autogen.sh
 #	fi
+	use debug && sed -i -e 's/CURLOPT_VERBOSE, 0/CURLOPT_VERBOSE, 1/g'  "${S}"/src/imageio/storage/picasa.c
 }
 
 src_configure() {
-	econf --disable-static \
+	use static && append-ldflags -static
+	econf $(use_enable static) \
 		$(use_enable openmp) \
 		$(use_enable nls) \
 		$(use_enable lensfun) \
 		$(use_enable gegl) \
 		$(use_enable gnome gconf) \
-		$(use_enable gnome schemas-install)
+		$(use_enable gnome schemas-install) \
+		$(use_enable debug)
 }
 
 src_compile() {
