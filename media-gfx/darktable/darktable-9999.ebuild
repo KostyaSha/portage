@@ -9,7 +9,7 @@ inherit autotools eutils gnome2-utils
 
 if [ ${PV} = 9999 ]; then
 	inherit git
-	EGIT_REPO_URI="git://darktable.git.sourceforge.net/gitroot/darktable/${PN}"
+	EGIT_REPO_URI="git://${PN}.git.sourceforge.net/gitroot/${PN}/${PN}"
 	EGIT_BRANCH="master"
 else
 	SRC_URI="mirror://sourceforge.net/${PN}/${P}.tar.bz2"
@@ -39,7 +39,7 @@ RDEPEND="
 DEPEND="${RDEPEND} >=dev-util/intltool-0.40.5"
 
 src_prepare() {
-	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
+#	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
 	intltoolize --force --automake --copy || die "intltoolize failed"
 	eautoreconf
 #	if [ ! -e configure ] ; then
@@ -60,10 +60,6 @@ src_configure() {
 		$(use_enable gnome gconf) \
 		$(use_enable gnome schemas-install) \
 		$(use_enable debug)
-}
-
-src_compile() {
-	emake || die "emake failed."
 }
 
 src_install() {
