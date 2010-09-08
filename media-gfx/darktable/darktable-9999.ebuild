@@ -7,12 +7,12 @@ EAPI=2
 # i'm not using gnome, so don't know how to install schemas
 inherit autotools eutils gnome2-utils
 
-if [ ${PV} = 9999 ]; then
+if [[ ${PV} = 9999 ]]; then
 	inherit git
 	EGIT_REPO_URI="git://${PN}.git.sourceforge.net/gitroot/${PN}/${PN}"
 	EGIT_BRANCH="master"
 else
-	SRC_URI="mirror://sourceforge.net/${PN}/${P}.tar.bz2"
+	SRC_URI="mirror://sourceforge.net/${PN}/${P}.tar.gz"
 fi
 
 DESCRIPTION="Utility to organize and develop raw images"
@@ -36,7 +36,9 @@ RDEPEND="
 	lensfun? ( >=media-libs/lensfun-0.2.4 )
 	gnome? ( >=gnome-base/gconf-2.24.0 )
 	>=media-libs/tiff-3.9.2"
-DEPEND="${RDEPEND} >=dev-util/intltool-0.40.5"
+DEPEND="
+	${RDEPEND} 
+	>=dev-util/intltool-0.40.5"
 
 src_prepare() {
 #	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
