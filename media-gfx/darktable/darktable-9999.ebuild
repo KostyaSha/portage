@@ -60,6 +60,7 @@ src_configure() {
 		$(use_enable lensfun) \
 		$(use_enable gegl) \
 		$(use_enable gnome gconf) \
+		$(use_enable gnome gkeyring) \
 		$(use_enable gnome schemas-install) \
 		$(use_enable debug)
 }
