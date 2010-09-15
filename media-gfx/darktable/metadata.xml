@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-<herd>maintainer-needed</herd>
-<use>
-	<flag name='gegl'>Enable gegl support</flag>
-	<flag name='lensfun'>Enable lensfun correction support</flag>
-</use>
-<longdescription lang="en">
-	Darktable is a virtual lighttable and darkroom for photographers: it manages
-	your digital negatives in a database and lets you view them through a
-	zoomable lighttable. It also enables you to develop raw images and enhance
-	them.
-</longdescription>
+	<herd>no-herd</herd>
+	<maintainer>
+		<email>gentoo.integer@gmail.com</email>
+		<name> Kostya Sha.</name>
+	</maintainer>
+	<use>
+		<flag name='gegl'>Enable gegl support</flag>
+		<flag name='lensfun'>Enable lensfun correction support</flag>
+	</use>
+	<longdescription lang="en">
+		Darktable is a virtual lighttable and darkroom for photographers: it manages
+		your digital negatives in a database and lets you view them through a
+		zoomable lighttable. It also enables you to develop raw images and enhance
+		them.
+	</longdescription>
 </pkgmetadata>
-

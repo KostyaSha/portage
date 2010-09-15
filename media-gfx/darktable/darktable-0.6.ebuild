@@ -12,7 +12,8 @@ if [[ ${PV} = 9999 ]]; then
 	EGIT_REPO_URI="git://${PN}.git.sourceforge.net/gitroot/${PN}/${PN}"
 	EGIT_BRANCH="master"
 else
-	SRC_URI="mirror://sourceforge.net/${PN}/${P}.tar.gz"
+	RESTRICT="mirror"
+	SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 fi
 
 DESCRIPTION="Utility to organize and develop raw images"
