@@ -2,9 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 EAPI=2
-# ebuild for darktable by jo hanika (hanatos@gmail.com)
-# rewrited by Kostya 'integer' Sha <gentoo.integer@gmail.com>
-# i'm not using gnome, so don't know how to install schemas
+
 inherit autotools eutils gnome2-utils
 
 if [[ ${PV} = 9999 ]]; then
@@ -12,7 +10,8 @@ if [[ ${PV} = 9999 ]]; then
 	EGIT_REPO_URI="git://${PN}.git.sourceforge.net/gitroot/${PN}/${PN}"
 	EGIT_BRANCH="master"
 else
-	SRC_URI="mirror://sourceforge.net/${PN}/${P}.tar.gz"
+	SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
+	RESTRICT="mirror"
 fi
 
 DESCRIPTION="Utility to organize and develop raw images"
