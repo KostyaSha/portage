@@ -20,25 +20,28 @@ HOMEPAGE="http://darktable.sourceforge.net/"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="debug gegl gnome openmp lensfun nls static"
 
-RDEPEND="
-	>=x11-libs/gtk+-2.18:2
-	>=gnome-base/libglade-2.6.3
-	>=dev-db/sqlite-3.6.11
-	>=x11-libs/cairo-1.8.6
-	gegl? ( >=media-libs/gegl-0.0.22 )
-	>=media-libs/lcms-1.17
-	>=media-libs/jpeg-6b-r8
-	>=media-gfx/exiv2-0.18.1
-	>=media-libs/libpng-1.2.38
-	lensfun? ( >=media-libs/lensfun-0.2.4 )
-	gnome? ( >=gnome-base/gconf-2.24.0 )
-	>=media-libs/tiff-3.9.2"
-DEPEND="
-	${RDEPEND} 
-	>=dev-util/intltool-0.40.5"
+RDEPEND="dev-db/sqlite:3
+		>=dev-libs/dbus-glib-0.80
+		>=gnome-base/libglade-2.6.3
+		>=media-gfx/exiv2-0.18.1
+		>=media-libs/openexr-1.2.0
+		>=media-libs/libgphoto2-2.4.5
+		>=media-libs/lcms-1.17
+		>=media-libs/jpeg-6b-r8
+		>=media-libs/libpng-1.2.0
+		>=media-libs/tiff-3.9.2
+		>=net-misc/curl-7.18.0
+		x11-libs/cairo
+		>=x11-libs/gtk+-2.18:2
+		gegl? ( >=media-libs/gegl-0.0.22 )
+		lensfun? ( >=media-libs/lensfun-0.2.3 )
+		gnome? ( >=gnome-base/gconf-2.26.0
+				>=gnome-base/gnome-keyring-2.28.0 )"
+DEPEND="${RDEPEND}
+		>=dev-util/intltool-0.40.5"
 
 src_prepare() {
 #	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
