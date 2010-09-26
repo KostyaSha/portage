@@ -44,11 +44,11 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 #	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
-	intltoolize --force --automake --copy || die "intltoolize failed"
-	eautoreconf
-#	if [ ! -e configure ] ; then
-#		./autogen.sh
-#	fi
+#	eautoreconf
+#	intltoolize --force --automake --copy || die "intltoolize failed"
+	if [ ! -e configure ] ; then
+		./autogen.sh
+	fi
 	use debug && sed -i -e 's/CURLOPT_VERBOSE, 0/CURLOPT_VERBOSE, 1/g'  "${S}"/src/imageio/storage/picasa.c
 # decrease load average, not worked
 #	use debug && sed -i -e '22i#define dt_ctl_get_num_procs() 0' "${S}"/src/main.c
