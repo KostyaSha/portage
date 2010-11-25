@@ -20,14 +20,14 @@ HOMEPAGE="http://darktable.sourceforge.net/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug gegl gnome openmp lensfun nls static"
+IUSE="gphoto2 debug gegl gnome openmp lensfun nls static"
 
 RDEPEND="dev-db/sqlite:3
 		>=dev-libs/dbus-glib-0.80
 		>=gnome-base/libglade-2.6.3
 		>=media-gfx/exiv2-0.18.0
 		>=media-libs/openexr-1.6.0
-		>=media-libs/libgphoto2-2.4.5
+		gphoto2? ( >=media-libs/libgphoto2-2.4.5 )
 		>=media-libs/lcms-1.17
 		>=media-libs/jpeg-6b-r8
 		>=media-libs/libpng-1.2.0
@@ -63,6 +63,7 @@ src_configure() {
 		$(use_enable nls) \
 		$(use_enable lensfun) \
 		$(use_enable gegl) \
+		$(use_enable gphoto2) \
 		$(use_enable gnome gconf) \
 		$(use_enable gnome gkeyring) \
 		$(use_enable gnome schemas-install) \
