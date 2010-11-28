@@ -20,7 +20,7 @@ HOMEPAGE="http://darktable.sourceforge.net/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug gegl gnome openmp lensfun nls static"
+IUSE="debug gnome openmp lensfun nls static"
 
 RDEPEND="dev-db/sqlite:3
 		>=dev-libs/dbus-glib-0.80
@@ -35,10 +35,9 @@ RDEPEND="dev-db/sqlite:3
 		>=net-misc/curl-7.18.0
 		x11-libs/cairo
 		>=x11-libs/gtk+-2.18:2
-		gegl? ( >=media-libs/gegl-0.0.22 )
 		lensfun? ( >=media-libs/lensfun-0.2.3 )
 		gnome? ( >=gnome-base/gconf-2.26.0
-			>=gnome-base/gnome-keyring-2.28.0 )"
+				>=gnome-base/gnome-keyring-2.28.0 )"
 DEPEND="${RDEPEND}
 		>=dev-util/intltool-0.40.5"
 
@@ -49,18 +48,16 @@ src_prepare() {
 	if [ ! -e configure ] ; then
 		./autogen.sh
 	fi
-	use debug && sed -i -e 's/CURLOPT_VERBOSE, 0/CURLOPT_VERBOSE, 1/g'  "${S}"/src/imageio/storage/picasa.c
-# decrease load average, not worked
-#	use debug && sed -i -e '22i#define dt_ctl_get_num_procs() 0' "${S}"/src/main.c
 }
 
 src_configure() {
-	use static && append-ldflags -static
-	econf $(use_enable static) \
+# TODO create static build for portable version
+#	use static && append-ldflags -static
+	econf \
+#		$(use_enable static) \
 		$(use_enable openmp) \
 		$(use_enable nls) \
 		$(use_enable lensfun) \
-		$(use_enable gegl) \
 		$(use_enable gnome gconf) \
 		$(use_enable gnome gkeyring) \
 		$(use_enable gnome schemas-install) \
@@ -71,4 +68,16 @@ src_install() {
 	emake DESTDIR="${D}" install || die "emake install failed."
 	find "${D}" -name '*.la' -exec rm -rf '{}' '+' || die "la removal failed"
 	dodoc ChangeLog README TODO TRANSLATORS || die "dodoc failed"
+}
+
+pkg_preinst() {
+	use gnome && gnome2_gconf_savelist
+}
+
+pkg_postinst() {
+	use gnome && gnome2_gconf_install
+}
+
+pkg_prerm() {
+	use gnome && gnome2_gconf_uninstall
 }
