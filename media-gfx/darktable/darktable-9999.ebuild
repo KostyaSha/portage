@@ -3,7 +3,7 @@
 # $Header: $
 EAPI=2
 
-inherit autotools eutils gnome2-utils
+inherit cmake-utils eutils gnome2-utils
 
 if [[ ${PV} = 9999 ]]; then
 	inherit git
@@ -39,35 +39,43 @@ RDEPEND="dev-db/sqlite:3
 		gnome? ( >=gnome-base/gconf-2.26.0
 				>=gnome-base/gnome-keyring-2.28.0 )"
 DEPEND="${RDEPEND}
-		>=dev-util/intltool-0.40.5"
+		>=dev-util/intltool-0.40.5i
+		openmp? ( >=sys-devel/gcc-4.4[openmp] )"
 
-src_prepare() {
+#src_prepare() {
 #	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
 #	eautoreconf
 #	intltoolize --force --automake --copy || die "intltoolize failed"
-	if [ ! -e configure ] ; then
-		./autogen.sh
-	fi
-}
+#	if [ ! -e configure ] ; then
+#		./autogen.sh
+#	fi
+#}
 
 src_configure() {
 # TODO create static build for portable version
 #	use static && append-ldflags -static
-	econf \
+#	econf \
 #		$(use_enable static) \
-		$(use_enable openmp) \
-		$(use_enable nls) \
-		$(use_enable lensfun) \
-		$(use_enable gnome gconf) \
-		$(use_enable gnome gkeyring) \
-		$(use_enable gnome schemas-install) \
-		$(use_enable debug)
+#		$(use_enable openmp) \
+#		$(use_enable nls) \
+#		$(use_enable lensfun) \
+#		$(use_enable gnome gconf) \
+#		$(use_enable gnome gkeyring) \
+#		$(use_enable gnome schemas-install) \
+#		$(use_enable debug)i
+	mycmakeargs=(
+		$(cmake-utils_use_use gconf GCONF_BACKEND) \
+		$(cmake-utils_use_use openmp OPENMP))
+
+	cmake-utils_src_configure
 }
 
 src_install() {
-	emake DESTDIR="${D}" install || die "emake install failed."
+#	emake DESTDIR="${D}" install || die "emake install failed."
+	cmake-utils_src_install
+
 	find "${D}" -name '*.la' -exec rm -rf '{}' '+' || die "la removal failed"
-	dodoc ChangeLog README TODO TRANSLATORS || die "dodoc failed"
+	dodoc doc/ChangeLog doc/README doc/TODO doc/TRANSLATORS || die "dodoc failed"
 }
 
 pkg_preinst() {
