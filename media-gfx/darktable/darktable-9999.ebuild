@@ -1,4 +1,4 @@
-# Copyright 1999-2010 Gentoo Foundation
+# Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 EAPI=2
@@ -64,8 +64,10 @@ src_configure() {
 #		$(use_enable gnome schemas-install) \
 #		$(use_enable debug)i
 	mycmakeargs=(
-		$(cmake-utils_use_use gconf GCONF_BACKEND) \
-		$(cmake-utils_use_use openmp OPENMP))
+		$(cmake-utils_use_use gnome GCONF_BACKEND) \
+		$(cmake-utils_use_use openmp OPENMP) \
+		$(cmake-utils_use_use gphoto CAMERA_SUPPORT)
+		)
 
 	cmake-utils_src_configure
 }
