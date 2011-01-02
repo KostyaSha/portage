@@ -42,6 +42,7 @@ DEPEND="${RDEPEND}
 		>=dev-util/intltool-0.40.5"
 
 src_prepare() {
+	 epatch "${FILESDIR}/${P}-gphoto2-configure.ac.patch"
 #	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
 #	eautoreconf
 #	intltoolize --force --automake --copy || die "intltoolize failed"
