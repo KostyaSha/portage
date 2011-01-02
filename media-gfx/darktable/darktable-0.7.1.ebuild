@@ -3,6 +3,9 @@
 # $Header: $
 EAPI=2
 
+WANT_AUTOMAKE="latest"
+WANT_AUTOCONF="latest"
+
 inherit autotools eutils gnome2-utils
 
 if [[ ${PV} = 9999 ]]; then
@@ -42,7 +45,7 @@ DEPEND="${RDEPEND}
 		>=dev-util/intltool-0.40.5"
 
 src_prepare() {
-	epatch "${FILESDIR}/${P}-gphoto2-gconf-configure.ac.patch"
+	epatch "${FILESDIR}/${P}-gphoto2-gconf-configure.ac.patch-2"
 	if ! use gnome; then
 	 sed -i -e '/AM_GCONF_SOURCE_2/d' \
 	  configure.ac || die "sed failed"
