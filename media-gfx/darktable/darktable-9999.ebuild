@@ -20,14 +20,14 @@ HOMEPAGE="http://darktable.sourceforge.net/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug gnome gphoto openmp lensfun nls static"
+IUSE="debug gnome gphoto2 openmp lensfun nls static"
 
 RDEPEND="dev-db/sqlite:3
 		>=dev-libs/dbus-glib-0.80
 		>=gnome-base/libglade-2.6.3
 		>=media-gfx/exiv2-0.18.0
 		>=media-libs/openexr-1.6.0
-		gphoto? ( >=media-libs/libgphoto2-2.4.5 )
+		gphoto2? ( >=media-libs/libgphoto2-2.4.5 )
 		>=media-libs/lcms-1.17
 		>=media-libs/jpeg-6b-r8
 		>=media-libs/libpng-1.2.0
@@ -66,7 +66,7 @@ src_configure() {
 	mycmakeargs=(
 		$(cmake-utils_use_use gnome GCONF_BACKEND) \
 		$(cmake-utils_use_use openmp OPENMP) \
-		$(cmake-utils_use_use gphoto CAMERA_SUPPORT)
+		$(cmake-utils_use_use gphoto2 CAMERA_SUPPORT)
 		)
 
 	cmake-utils_src_configure
