@@ -20,7 +20,7 @@ HOMEPAGE="http://darktable.sourceforge.net/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug gnome gphoto2 openmp lensfun nls static"
+IUSE="debug gnome gphoto2 openmp static"
 
 RDEPEND="dev-db/sqlite:3
 		>=dev-libs/dbus-glib-0.80
@@ -35,7 +35,7 @@ RDEPEND="dev-db/sqlite:3
 		>=net-misc/curl-7.18.0
 		x11-libs/cairo
 		>=x11-libs/gtk+-2.18:2
-		lensfun? ( >=media-libs/lensfun-0.2.3 )
+		>=media-libs/lensfun-0.2.3
 		gnome? ( >=gnome-base/gconf-2.26.0
 				>=gnome-base/gnome-keyring-2.28.0 )"
 DEPEND="${RDEPEND}
