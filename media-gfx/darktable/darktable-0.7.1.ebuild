@@ -42,13 +42,17 @@ DEPEND="${RDEPEND}
 		>=dev-util/intltool-0.40.5"
 
 src_prepare() {
-	 epatch "${FILESDIR}/${P}-gphoto2-configure.ac.patch"
-#	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
-#	eautoreconf
-#	intltoolize --force --automake --copy || die "intltoolize failed"
-	if [ ! -e configure ] ; then
-		./autogen.sh
+	epatch "${FILESDIR}/${P}-gphoto2-gconf-configure.ac.patch"
+	if ! use gnome; then
+	 sed -i -e '/AM_GCONF_SOURCE_2/d' \
+	  configure.ac || die "sed failed"
 	fi
+#	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
+	eautoreconf
+	intltoolize --force --automake --copy || die "intltoolize failed"
+#	if [ ! -e configure ] ; then
+#		./autogen.sh
+#	fi
 }
 
 src_configure() {
