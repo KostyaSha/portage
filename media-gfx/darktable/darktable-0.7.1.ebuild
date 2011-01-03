@@ -51,11 +51,11 @@ src_prepare() {
 	  configure.ac || die "sed failed"
 	fi
 #	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
-	eautoreconf
-	intltoolize --force --automake --copy || die "intltoolize failed"
-#	if [ ! -e configure ] ; then
-#		./autogen.sh
-#	fi
+#	eautoreconf
+#	intltoolize --force --automake --copy || die "intltoolize failed"
+	if [ ! -e configure ] ; then
+		./autogen.sh
+	fi
 }
 
 src_configure() {
