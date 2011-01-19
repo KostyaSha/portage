@@ -20,7 +20,7 @@ HOMEPAGE="http://darktable.sourceforge.net/"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug gnome gphoto2 openmp static"
+IUSE="debug gnome gphoto2 lensfun openmp rawspeed static"
 
 RDEPEND="dev-db/sqlite:3
 		>=dev-libs/dbus-glib-0.80
@@ -35,7 +35,7 @@ RDEPEND="dev-db/sqlite:3
 		>=net-misc/curl-7.18.0
 		x11-libs/cairo
 		>=x11-libs/gtk+-2.18:2
-		>=media-libs/lensfun-0.2.3
+		lensfun? ( >=media-libs/lensfun-0.2.3 )
 		gnome? ( >=gnome-base/gconf-2.26.0
 				>=gnome-base/gnome-keyring-2.28.0 )"
 DEPEND="${RDEPEND}
@@ -66,7 +66,8 @@ src_configure() {
 	mycmakeargs=(
 		$(cmake-utils_use_use gnome GCONF_BACKEND) \
 		$(cmake-utils_use_use openmp OPENMP) \
-		$(cmake-utils_use_use gphoto2 CAMERA_SUPPORT)
+		$(cmake-utils_use_use gphoto2 CAMERA_SUPPORT) \
+		$(cmake-utils_use_use !rawspeed DONT_USE_RAWSPEED) 
 		)
 
 	cmake-utils_src_configure
