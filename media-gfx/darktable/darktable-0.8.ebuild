@@ -15,12 +15,12 @@ else
 fi
 
 DESCRIPTION="Utility to organize and develop raw images"
-HOMEPAGE="http://darktable.sourceforge.net/"
+HOMEPAGE="http://darktable.sourceforge.net"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
-IUSE="debug gnome gphoto2 lensfun openmp rawspeed static"
+KEYWORDS="~x86 ~amd64"
+IUSE="debug gnome gphoto2 lensfun openmp rawspeed"
 
 RDEPEND="dev-db/sqlite:3
 		>=dev-libs/dbus-glib-0.80
@@ -52,17 +52,6 @@ DEPEND="${RDEPEND}
 #}
 
 src_configure() {
-# TODO create static build for portable version
-#	use static && append-ldflags -static
-#	econf \
-#		$(use_enable static) \
-#		$(use_enable openmp) \
-#		$(use_enable nls) \
-#		$(use_enable lensfun) \
-#		$(use_enable gnome gconf) \
-#		$(use_enable gnome gkeyring) \
-#		$(use_enable gnome schemas-install) \
-#		$(use_enable debug)i
 	mycmakeargs=(
 		$(cmake-utils_use_use gnome GCONF_BACKEND) \
 		$(cmake-utils_use_use openmp OPENMP) \
@@ -74,7 +63,6 @@ src_configure() {
 }
 
 src_install() {
-#	emake DESTDIR="${D}" install || die "emake install failed."
 	cmake-utils_src_install
 
 	find "${D}" -name '*.la' -exec rm -rf '{}' '+' || die "la removal failed"
