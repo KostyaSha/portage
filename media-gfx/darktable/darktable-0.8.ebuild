@@ -42,21 +42,12 @@ DEPEND="${RDEPEND}
 		>=dev-util/intltool-0.40.5i
 		openmp? ( >=sys-devel/gcc-4.4[openmp] )"
 
-#src_prepare() {
-#	sed -e 's/^dtdoc_/#\0/g' -i Makefile.am
-#	eautoreconf
-#	intltoolize --force --automake --copy || die "intltoolize failed"
-#	if [ ! -e configure ] ; then
-#		./autogen.sh
-#	fi
-#}
-
 src_configure() {
 	mycmakeargs=(
 		$(cmake-utils_use_use gnome GCONF_BACKEND) \
 		$(cmake-utils_use_use openmp OPENMP) \
 		$(cmake-utils_use_use gphoto2 CAMERA_SUPPORT) \
-		$(cmake-utils_use_use !rawspeed DONT_USE_RAWSPEED) 
+		$(cmake-utils_use_use !rawspeed DONT_USE_RAWSPEED)
 		)
 
 	cmake-utils_src_configure

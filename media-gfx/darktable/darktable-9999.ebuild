@@ -67,7 +67,7 @@ src_configure() {
 		$(cmake-utils_use_use gnome GCONF_BACKEND) \
 		$(cmake-utils_use_use openmp OPENMP) \
 		$(cmake-utils_use_use gphoto2 CAMERA_SUPPORT) \
-		$(cmake-utils_use_use !rawspeed DONT_USE_RAWSPEED) 
+		$(cmake-utils_use_use !rawspeed DONT_USE_RAWSPEED)
 		)
 
 	cmake-utils_src_configure
